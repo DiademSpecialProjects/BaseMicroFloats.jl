@@ -1,3 +1,7 @@
+#=
+   confirm isbitstype
+=#
+
 module SimpleMicroFloats
 
 export AbstractBinaryFloat, bitwidth, fraction_bits, nvalues, bitsof,  # import all of these

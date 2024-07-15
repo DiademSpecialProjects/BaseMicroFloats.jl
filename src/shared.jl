@@ -5,10 +5,9 @@ const ABF{W, P} = AbstractBinaryFloat{W, P} # AbstractBinaryFloat{Bitwidth, Prec
 
 nvalues(nbits) = 2^abs(nbits)
 
-MemBits(::Type{AbstractBinaryFloat{BitWidth, Precision}) = BitWidth
-Precision(::Type{AbstractBinaryFloat{BitWidth, Precision}) = Precision
+bitwidth(::Type{AbstractBinaryFloat{BitWidth, Precision}) = BitWidth
+Base.precision(::Type{AbstractBinaryFloat{BitWidth, Precision}) = Precision
 
-ExpBits(::Type{AbstractBinaryFloat{BitWidth, Precision}) = BitWidth - Precision
-FracBits(::Type{AbstractBinaryFloat{BitWidth, Precision}) = Precision - 1
+expbits(::Type{AbstractBinaryFloat{BitWidth, Precision}) = BitWidth - Precision
+fracbits(::Type{AbstractBinaryFloat{BitWidth, Precision}) = Precision - 1
   
-

@@ -1,7 +1,7 @@
 abstract type AbstractBinaryFloat{BitWidth, Precision} <: AbstractFloat end
 
-bitwidth(::Type{AbstractBinaryFloat{BitWidth, Precision}}) = BitWidth
-fraction_bits(::Type{AbstractBinaryFloat{BitWidth, Precision}}) = Precision - 1
+bitwidth(::Type{AbstractBinaryFloat{BitWidth, Precision}}) where {BitWidth, Precision} = BitWidth
+fraction_bits(::Type{AbstractBinaryFloat{BitWidth, Precision}}) where {BitWidth, Precision} = Precision - 1
 
 const ABF{W, P} = AbstractBinaryFloat{W, P} # AbstractBinaryFloat{Bitwidth, Precision}
 
@@ -19,13 +19,13 @@ const μSafeInt = sizeof(μInt) < 16 ? widen(μInt) : μInt
 const μSafeRational = Rational{μSafeInt}
 
 # from Base
-Base.length(::Type{AbstractBinaryFloat{BitWidth, Precision}}) = BitWidth
-Base.precision(::Type{AbstractBinaryFloat{BitWidth, Precision}}) = Precision
+Base.length(::Type{AbstractBinaryFloat{BitWidth, Precision}}) where {BitWidth, Precision} = BitWidth
+Base.precision(::Type{AbstractBinaryFloat{BitWidth, Precision}}) where {BitWidth, Precision} = Precision
 
-Base.exponent_bits(::Type{AbstractBinaryFloat{BitWidth, Precision}}) = BitWidth - Precision
-Base.significand_bits(::Type{AbstractBinaryFloat{BitWidth, Precision}}) = Precision - 1
+Base.exponent_bits(::Type{AbstractBinaryFloat{BitWidth, Precision}}) where {BitWidth, Precision} = BitWidth - Precision
+Base.significand_bits(::Type{AbstractBinaryFloat{BitWidth, Precision}}) where {BitWidth, Precision} = Precision - 1
 
-Base.isbitstype(::Type{AbstractBinaryFloat{BitWidth, Precision}}) = true
+Base.isbitstype(::Type{AbstractBinaryFloat{BitWidth, Precision}}) where {BitWidth, Precision} = true
 
 # low level support functions
 

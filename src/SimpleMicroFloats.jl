@@ -1,9 +1,9 @@
 module SimpleMicroFloats
 
-export AbstractBinaryFloat, bitwidth, precision, expbits, fracbits, signbits, nvalues,    # import all of these
-    SimpleMicroFloat
+export AbstractBinaryFloat, bitwidth, nvalues,    # import all of these
+       SimpleMicroFloat
 
-import Base: precision, exponent_bits, significand_bits
+import Base: precision, exponent_bits, significand_bits, isbitstype
 
 include("shared.jl")
 

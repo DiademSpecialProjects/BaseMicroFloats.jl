@@ -1,7 +1,6 @@
 module SimpleMicroFloats
 
-export AbstractBinaryFloat, bitwidth, nvalues,    # import all of these
-       fraction_bits,
+export AbstractBinaryFloat, bitwidth, fraction_bits, nvalues, bitsof,  # import all of these
        SimpleMicroFloat
 
 import Base: precision, exponent_bits, significand_bits, isbitstype

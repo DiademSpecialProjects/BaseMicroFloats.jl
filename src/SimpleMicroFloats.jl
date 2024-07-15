@@ -15,4 +15,6 @@ include("type.jl")
 include("model.jl")
 include("construct.jl")
 
+include("aqua.jl")
+
 end  # SimpleMicroFloats

@@ -1,6 +1,9 @@
 module SimpleMicroFloats
 
-export SimpleMicroFloat
+export AbstractBinaryFloat, MemBits, ExpBits, SigBits, n_values,    # import all of these
+    SimpleMicroFloat
+
+include("shared.jl")
 
 include("type.jl")
 include("model.jl")

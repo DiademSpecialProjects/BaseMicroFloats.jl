@@ -3,5 +3,5 @@ abstract type AkoSimpleMicroFloat{BitWidth, Precision} <: AbstractBinaryFloat{Bi
 
 struct SimpleMicroFloat{BitWidth, Precision} <:  AkoSimpleMicroFloat{BitWidth, Precision}
     values::Vector{μValue}
-    codings::Vector{μEncoding}
+    codings::Vector{μEncode}
 end

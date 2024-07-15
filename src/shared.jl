@@ -9,5 +9,6 @@ MemBits(::Type{AbstractBinaryFloat{BitWidth, Precision}) = BitWidth
 Precision(::Type{AbstractBinaryFloat{BitWidth, Precision}) = Precision
 
 ExpBits(::Type{AbstractBinaryFloat{BitWidth, Precision}) = BitWidth - Precision
-
+FracBits(::Type{AbstractBinaryFloat{BitWidth, Precision}) = Precision - 1
+  
 

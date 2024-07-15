@@ -1,7 +1,7 @@
 abstract type AbstractBinaryFloat{BitWidth, Precision} <: AbstractFloat end
 
-bitwidth(::Type{AbstractBinaryFloat{BitWidth, Precision}) = BitWidth
-fraction_bits(::Type{AbstractBinaryFloat{BitWidth, Precision}) = Precision - 1
+bitwidth(::Type{AbstractBinaryFloat{BitWidth, Precision}}) = BitWidth
+fraction_bits(::Type{AbstractBinaryFloat{BitWidth, Precision}}) = Precision - 1
 
 const ABF{W, P} = AbstractBinaryFloat{W, P} # AbstractBinaryFloat{Bitwidth, Precision}
 

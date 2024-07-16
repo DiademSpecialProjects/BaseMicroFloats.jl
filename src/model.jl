@@ -1,19 +1,20 @@
-
 function SimpleFloatModel(bitwidth, precision)
     n_values = 2^bitwidth
-    values = (; n_values, bitwidth, precision)
+
+    n_sign_bits = 0
+    n_sign_values = 2 * n_sign_bits
 
     n_exponent_bits = bitwidth - precision 
-    n_exponents = 2^n_exponent_bits
-    n_cycles = cld(n_values, n_exponents)
-    exponents = (; n_exponents, n_cycles)
+    n_exponent_values = 2^n_exponent_bits
+    n_exponent_cycles = cld(n_values, n_exponent_values)
 
-    n_fraction_bits = precision - 1
-    n_fractions = 2^n_fraction_bits
-    n_cycles = cld(n_values, n_fractions)
-    fractions = (; n_fractions, n_cycles)
+    n_fraction_bits = bitwidth - n_exponent_bits - n_sign_bits 
+    n_fraction_values = 2^n_fraction_bits
+    n_fraction_cycles = cld(n_values, n_fraction_values)
 
-    (; values, exponents, fractions)
+    (; bitwidth, precision, n_sign_bits, n_exponent_bits, n_fraction_bits,
+                            n_sign_values, n_exponent_values, n_fraction_values,
+                            n_exponent_cycles, n_fraction_cycles)
 end
 
     

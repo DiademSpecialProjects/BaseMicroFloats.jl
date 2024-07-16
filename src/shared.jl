@@ -1,9 +1,18 @@
-abstract type AbstractBinaryFloat{BitWidth, Precision} <: AbstractFloat end
+abstract type AbstractMicroFloat{BitWidth, Precision}  <: AbstractFloat end
+abstract type AbstractSimpleFloat{BitWidth, Precision} <: AbstractMicroFloat{BitWidth, Precision} end
 
-bitwidth(::Type{AbstractBinaryFloat{BitWidth, Precision}}) where {BitWidth, Precision} = BitWidth
-fraction_bits(::Type{AbstractBinaryFloat{BitWidth, Precision}}) where {BitWidth, Precision} = Precision - 1
+function n_encoding_bits() end
+function n_sign_bits() end
+function n_exponent_bits() end
+function n_fraction_bits() end
 
-const ABF{W, P} = AbstractBinaryFloat{W, P} # AbstractBinaryFloat{Bitwidth, Precision}
+n_encoding_bits(::Type{AbstractMicroFloat{BitWidth, Precision}}) where {BitWidth, Precision} = BitWidth
+n_fraction_bits(::Type{AbstractMicroFloat{BitWidth, Precision}}) where {BitWidth, Precision} = Precision - 1
+
+n_exponent_bits(::Type{AbstractMicroFloat{BitWidth, Precision}}) where {BitWidth, Precision} = BitWidth - Precision
+n_exponent_bits(::Type{AbstractSimpleFloat{BitWidth, Precision}}) where {BitWidth, Precision} = BitWidth - Precision + 1
+
+n_sign_bits(::Type{AbstractSimpleFloat{BitWidth, Precision}}) where {BitWidth, Precision} = 0
 
 # const concrete types
 
@@ -18,23 +27,14 @@ const μSafeInt = sizeof(μInt) < 16 ? widen(μInt) : μInt
 
 const μSafeRational = Rational{μSafeInt}
 
-# from Base
-Base.length(::Type{AbstractBinaryFloat{BitWidth, Precision}}) where {BitWidth, Precision} = BitWidth
-Base.precision(::Type{AbstractBinaryFloat{BitWidth, Precision}}) where {BitWidth, Precision} = Precision
-
-Base.exponent_bits(::Type{AbstractBinaryFloat{BitWidth, Precision}}) where {BitWidth, Precision} = BitWidth - Precision
-Base.significand_bits(::Type{AbstractBinaryFloat{BitWidth, Precision}}) where {BitWidth, Precision} = Precision - 1
-
-Base.isbitstype(::Type{AbstractBinaryFloat{BitWidth, Precision}}) where {BitWidth, Precision} = true
-
 # low level support functions
 
 nvalues(nbits) = 2^abs(nbits)
 bitsof(::Type{T}) where {T} = 8 * sizeof(T)
 bitsof(x::T) where {T} = bitsof(T)
 
-bitsof(T::Type{AbstractBinaryFloat{BitWidth, Precision}}) where {BitWidth, Precision} = 8 * sizeof(T)
-bitsof(x::AbstractBinaryFloat{BitWidth, Precision}) where {BitWidth, Precision} = 8 * sizeof(x)
+bitsof(T::Type{AbstractMicroFloat{BitWidth, Precision}}) where {BitWidth, Precision} = 8 * sizeof(T)
+bitsof(x::AbstractMicroFloat{BitWidth, Precision}) where {BitWidth, Precision} = 8 * sizeof(x)
 
 
   

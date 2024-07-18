@@ -8,6 +8,6 @@ n_sign_bits(::Type{SimpleFloat{BitWidth, Precision}}) where {BitWidth, Precision
 n_exponent_bits(::Type{SimpleFloat{BitWidth, Precision}}) where {BitWidth, Precision} = BitWidth - Precision + 1
 n_fraction_bits(::Type{AbstractMicroFloat{BitWidth, Precision}}) where {BitWidth, Precision} = Precision - 1
 
-for F in (:n_bits, n_sign_bits, n_exponent_bits, n_fraction_bits)
+for F in (:n_bits, :n_sign_bits, :n_exponent_bits, :n_fraction_bits)
      @eval $F(x::SimpleFloat{BitWidth, Precision}) where {BitWidth, Precision} = $F(typeof(x))
 end

@@ -10,7 +10,11 @@ function construct_simplefloat(bitwidth, precision)
 end
 
 function construct_fraction_series(n_values, n_cycles)
-    fraction_sequence = construct_fraction_sequence(n_values)
+    fraction_sequence = (0:n_values-1) .// n_values
+    mixed_fraction_sequence = 1 .+ fraction_sequence
+    mixed_fraction_series = Iterators.flatten(fill(mixed_fraction_sequence, n_cycles-1))
+    append!(fraction_sequence, mixed_fraction_series)
+    fraction_sequence
 end
 
 function construct_exponent_series(n_values, n_cycles)

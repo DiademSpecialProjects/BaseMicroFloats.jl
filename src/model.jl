@@ -4,7 +4,7 @@ function SimpleFloatModel(bitwidth, precision)
     n_sign_bits = 0
     n_sign_values = 2 * n_sign_bits
 
-    n_exponent_bits = bitwidth - precision 
+    n_exponent_bits = bitwidth - precision + 1
     n_exponent_values = 2^n_exponent_bits
     n_exponent_cycles = cld(n_values, n_exponent_values)
 

@@ -6,7 +6,7 @@ module SimpleMicroFloats
 
 export AbstractMicroFloat,
        μEncode, μValue, μSafeEncode, μSafeValue,
-       SimpleMicroFloat
+       SimpleFloat
 
 include("shared.jl")
 

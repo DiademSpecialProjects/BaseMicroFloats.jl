@@ -4,7 +4,7 @@ model = (; bitwidth, precision, n_values,
            n_fraction_bits, n_fraction_values, n_fraction_cycles)
 =#
 
-function construct_simplefloat(bitwidth, precision)
+function construct_SimpleFloat(bitwidth, precision)
     model = characterize_SimpleFloat(bitwidth, precision)
     significands = construct_significand_series(model)
     exponents = construct_exponent_series(model)

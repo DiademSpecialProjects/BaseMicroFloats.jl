@@ -1,4 +1,4 @@
-function characterize_simplefloat(bitwidth, precision)
+function characterize_SimpleFloat(bitwidth, precision)
     n_values = 2^bitwidth
 
     n_fraction_bits = precision - 1 

@@ -1,4 +1,4 @@
-struct SimpleFloat{BitWidth, Precision} <:  SimpleMicroFloat{BitWidth, Precision}
+struct SimpleFloat{BitWidth, Precision} <:  AbstractSimpleFloat{BitWidth, Precision}
     values::Vector{μValue}
     codings::Vector{μEncode}
 end

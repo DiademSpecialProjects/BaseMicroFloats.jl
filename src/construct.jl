@@ -5,6 +5,7 @@
 function construct_simplefloat(bitwidth, precision)
     model = SimpleFloatModel(bitwidth, precision)
     fractions = construct_fraction_series(model.n_fraction_values, model.n_fraction_cycles)
+    bias = exponent_bias(bitwidth, precision)
     exponents = construct_exponent_series(model.n_exponent_values, model.n_exponent_cycles)
 
 end
@@ -18,5 +19,12 @@ function construct_fraction_series(n_values, n_cycles)
 end
 
 function construct_exponent_series(n_values, n_cycles)
+    bias = (n_values >> 1) - 1
+    raw_exponent_sequence = (0:n_values-1) 
+    biased_exponent_sequence = raw_exponent_sequence .- bias
+    series = 
+    mixed_fraction_series = Iterators.flatten(fill(mixed_fraction_sequence, n_cycles-1))
+    append!(fraction_sequence, mixed_fraction_series)
+    fraction_sequence
     exponent_sequence = construct_exponent_sequence(n_values)
 end

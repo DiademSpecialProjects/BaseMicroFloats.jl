@@ -17,4 +17,16 @@ function SimpleFloatModel(bitwidth, precision)
                             n_exponent_cycles, n_fraction_cycles)
 end
 
-    
+#=
+n_fraction_cycles * n_fraction_values == n_exponent_cycles * n_exponent_values == n_values
+
+n_fraction_values == n_exponent_cycles
+n_fraction_cycles == n_exponent_values
+=#
+
+min_raw_exponent = 0
+max_raw_exponent = n_exponent_values - 1
+raw_exponent_sequence = min_raw_exponent:max_raw_exponent
+bias = 2^(n_exponent_values-1)
+biased_exponent_sequence = raw_exponent_sequence .- bias
+exponent_sequence = 2.0 .^ biased_exponent_sequence

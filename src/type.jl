@@ -3,11 +3,8 @@ struct SimpleFloat{BitWidth, Precision} <:  AbstractSimpleFloat{BitWidth, Precis
     codings::Vector{μEncode}
 end
 
-n_bits(::Type{AbstractMicroFloat{BitWidth, Precision}}) where {BitWidth, Precision} = BitWidth
-n_sign_bits(::Type{SimpleFloat{BitWidth, Precision}}) where {BitWidth, Precision} = 0
-n_exponent_bits(::Type{SimpleFloat{BitWidth, Precision}}) where {BitWidth, Precision} = BitWidth - Precision + 1
-n_fraction_bits(::Type{AbstractMicroFloat{BitWidth, Precision}}) where {BitWidth, Precision} = Precision - 1
-
-for F in (:n_bits, :n_sign_bits, :n_exponent_bits, :n_fraction_bits)
-     @eval $F(x::SimpleFloat{BitWidth, Precision}) where {BitWidth, Precision} = $F(typeof(x))
+function SimpleFloat(bitwidth, precision)
+    values = map(μValue, construct_SimpleFloat(bitwidth, precision))
+    codings = map(μEncode, 0:2^(bitwidth-1))
+    SimpleFloat{bitwidth, precision}(values, codings)
 end

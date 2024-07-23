@@ -12,7 +12,7 @@ function construct_SimpleFloat(bitwidth, precision)
 end
 
 function construct_significand_series(model)
-    fraction_sequence = (0:model.n_fraction_values-1) .// model.n_values
+    fraction_sequence = (0:model.n_fraction_values-1) .// model.n_fraction_values
     normal_sequence = 1 .+ fraction_sequence
     append!(fraction_sequence, repeat(normal_sequence, model.n_fraction_cycles - 1))
 end

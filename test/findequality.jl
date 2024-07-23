@@ -24,3 +24,12 @@ normal_sequence53 = 1 .+ fraction_sequence53
 bias53 = (model53.n_exponent_values >> 1)
 raw_exponent_sequence53 = (0:model53.n_exponent_values-1) 
 biased_exponent_sequence53 = collect(raw_exponent_sequence53 .- bias53)
+
+sf32 = SMF.SimpleMicroFloat(3,2)
+model32 = SMF.characterize_SimpleFloat(3,2)
+fraction_sequence32 = (0:model32.n_fraction_values-1) .// model32.n_fraction_values
+normal_sequence32 = 1 .+ fraction_sequence32
+bias32 = (model32.n_exponent_values >> 1)
+raw_exponent_sequence32 = (0:model32.n_exponent_values-1) 
+biased_exponent_sequence32 = collect(raw_exponent_sequence32 .- bias32)
+biased_exponent_sequence32[1] = biased_exponent_sequence32[2]

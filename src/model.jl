@@ -11,6 +11,8 @@ function characterize_SimpleFloat(bitwidth, precision)
 
     n_exponent_bits = bitwidth - n_fraction_bits # there is no sign bit
 
+    @assert 2^n_exponent_bits == n_exponent_values
+    
     (; bitwidth, precision, n_values, 
        n_exponent_bits, n_exponent_values, n_exponent_cycles,
        n_fraction_bits, n_fraction_values, n_fraction_cycles)

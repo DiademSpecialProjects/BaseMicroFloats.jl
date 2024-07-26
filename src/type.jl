@@ -11,6 +11,9 @@ struct SimpleMicroFloat{Bits, Prec} <: AkoSimpleMicroFloat{Bits, Prec}
     end
 end
 
+encoding(x::SimpleMicroFloat) = x.encoding
+Base.values(x::SimpleMicroFloat) = x.values
+
 bitwidth(::Type{SimpleMicroFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Bitwidth
 precision(::Type{SimpleMicroFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Precision
 
@@ -29,6 +32,9 @@ struct SimpleFloat{Bits, Prec} <: AkoSimpleMicroFloat{Bits, Prec}
         return new{Bits,Prec}(code, value)
     end
 end
+
+code(x::SimpleMicroFloat) = x.code
+value(x::SimpleMicroFloat) = x.value
 
 bitwidth(::Type{SimpleFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Bitwidth
 precision(::Type{SimpleFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Precision

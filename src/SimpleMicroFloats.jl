@@ -6,7 +6,8 @@ module SimpleMicroFloats
 
 export AbstractMicroFloat, AkoSimpleMicroFloat, 
        SimpleMicroFloat, SimpleFloat,
-       bitwidth, precision
+       bitwidth, precision,
+       encoding, values, code, value
 
 include("shared.jl")
 

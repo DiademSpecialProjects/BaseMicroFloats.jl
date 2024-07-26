@@ -25,8 +25,9 @@ SMF21 = SimpleMicroFloat(2, 1)
 SMF31 = SimpleMicroFloat(3, 1)
 SMF32 = SimpleMicroFloat(3, 2)
 
-(T)(code, value) where {Bits, Prec, T<:SimpleMicroFloat{Bits, Prec}} = SimpleFloat{Bits, Prec}(code, value)
+bitwidth(x::SimpleMicroFloat{Bitwidth, Precision}) = bitwidth(typeof(x))
+precision(x::SimpleMicroFloat{Bitwidth, Precision}) = precision(typeof(x))
 
-smf21_0 = (SMF21)(0x00, 0.0)
+smf21_0 = SimpleFloat{bitwidth(SMF21), precision(SMF21)}(0x00, 0.0)
 
 # SimpleFloat{Bits, Prec}(code, value) where {Bits, Prec} = SimpleFloat(Bits, Prec, code, value)

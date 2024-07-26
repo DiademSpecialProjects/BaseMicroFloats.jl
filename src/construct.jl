@@ -1,31 +1,40 @@
-#= 
-model = (; bitwidth, precision, n_values, 
-           n_exponent_bits, n_exponent_values, n_exponent_cycles,
-           n_fraction_bits, n_fraction_values, n_fraction_cycles)
-=#
-
-function construct_SimpleFloat(bitwidth, precision)
-    model = characterize_SimpleFloat(bitwidth, precision)
-    significands = construct_significand_series(model)
-    exponents = construct_exponent_series(model)
-    significands .* exponents
+function SimpleFloat_encoding(bitwidth, precision) # provide encoding sequence
+    T = bitwidth <= 8 ? UInt8 : UInt16
+    n_values = 2^bitwidth
+    v = Vector{T}(undef, n_values)
+    v .= T(0):T(n_values-1) # the value of the last line in a function is returned
 end
 
-function construct_significand_series(model)
-    fraction_sequence = (0:model.n_fraction_values-1) .// model.n_fraction_values
+function SimpleFloat_values(bitwidth, precision) # provide simple value sequence
+    T = bitwidth <= 8 ? Float32 : Float64
+    n_values = 2^bitwidth
+    fraction_bits = precision - 1
+    n_fractions = 2^fraction_bits
+    n_fraction_cycles = div(n_values, n_fractions)
+    n_exponents = n_fraction_cycles
+    n_exponent_cycles = n_fractions
+    significands = SimpleFloat_significands(n_fractions, n_fraction_cycles)
+    exponents = SimpleFloat_exponents(n_exponents, n_exponent_cycles)
+    map(T, significands .* exponents)
+end
+
+function SimpleFloat_significands(n_fractions, n_fraction_cycles)
+    fraction_sequence = (0:n_fractions-1) .// n_fractions
     normal_sequence = 1 .+ fraction_sequence
-    append!(fraction_sequence, repeat(normal_sequence, model.n_fraction_cycles - 1))
+    append!(fraction_sequence, repeat(normal_sequence, n_fraction_cycles - 1))
 end
 
-function construct_exponent_series(model)
-    biased_exponent_series = construct_biased_exponent_series(model)
-    map(x->2.0^x, biased_exponent_series)
+exponent_bias(n_exponent_values) = n_exponent_values >> 1
+
+function SimpleFloat_exponents(n_exponents, n_exponent_cycles)
+    biased_exponents = SimpleFloat_biasedexponents(n_exponents, n_exponent_cycles)
+    map(x->2.0^x, biased_exponents)
 end
 
-function construct_biased_exponent_series(model)
-    bias = (model.n_exponent_values >> 1)
-    raw_exponent_sequence = (0:model.n_exponent_values-1) 
-    biased_exponent_sequence = collect(raw_exponent_sequence .- bias)
-    biased_exponent_sequence[1] = biased_exponent_sequence[2] # exponent for subnormals is min exponent for normals
-    collect(Iterators.flatten(map(x->fill(x, model.n_fraction_values), biased_exponent_sequence)))
+function SimpleFloat_biasedexponents(n_exponents, n_exponent_cycles)
+    bias = exponent_bias(n_exponents)
+    biased_exponents = collect( (0:n_exponents-1) .- bias )
+    # exponent for subnormals equals the minimum exponent for normals
+    biased_exponents[1] = biased_exponents[2]
+    collect(Iterators.flatten(map(x->fill(x, n_exponent_cycles), biased_exponents)))
 end

@@ -25,6 +25,9 @@ SMF21 = SimpleMicroFloat(2, 1)
 SMF31 = SimpleMicroFloat(3, 1)
 SMF32 = SimpleMicroFloat(3, 2)
 
+bitwidth(Type{SimpleMicroFloat{Bitwidth, Precision}}) = Bitwidth
+precision(Type{SimpleMicroFloat{Bitwidth, Precision}}) = Precision
+
 bitwidth(x::SimpleMicroFloat{Bitwidth, Precision}) = bitwidth(typeof(x))
 precision(x::SimpleMicroFloat{Bitwidth, Precision}) = precision(typeof(x))
 

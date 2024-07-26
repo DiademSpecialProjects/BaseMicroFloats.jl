@@ -31,6 +31,6 @@ precision(::Type{SimpleMicroFloat{Bitwidth, Precision}}) where {Bitwidth, Precis
 bitwidth(x::SimpleMicroFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = bitwidth(typeof(x))
 precision(x::SimpleMicroFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = precision(typeof(x))
 
-smf21_0 = SimpleFloat{bitwidth(SMF21), precision(SMF21)}(0x00, 0.0)
+smf21_0 = SimpleFloat{bitwidth(SMF21), precision(SMF21)}(0x00, 0.0f0)
 
 # SimpleFloat{Bits, Prec}(code, value) where {Bits, Prec} = SimpleFloat(Bits, Prec, code, value)

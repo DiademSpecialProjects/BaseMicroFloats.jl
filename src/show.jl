@@ -1,3 +1,7 @@
+function consistent_rationals(xs)
+    consistent_numers(xs) .// maxdenom(xs)
+end
+
 maxdenom(xs) = maximum(denominator.(rationalize.(xs)))
 
 function consistent_numers(xs)

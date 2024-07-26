@@ -5,7 +5,7 @@
 module SimpleMicroFloats
 
 export AbstractMicroFloat, AkoSimpleMicroFloat, 
-       SimpleMicroFloat, SimpleFloat,
+       SimpleMicroFloat,
        bitwidth, precision,
        encoding, values, code, value,
        consistent_rationals

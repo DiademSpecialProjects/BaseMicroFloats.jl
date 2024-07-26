@@ -1,16 +1,22 @@
-struct SimpleMicroFloat{BitWidth, Precision} <:  AbstractSimpleFloat{BitWidth, Precision}
-    values::Vector{μValue}
-    codings::Vector{μEncode}
+abstract type AkoSimpleMicroFloat{BitWidth, Precision} <: AbstractMicroFloat{BitWidth, Precision} end
+
+struct SimpleMicroFloat{Bits, Prec} <: AkoSimpleMicroFloat{Bits, Prec}
+    encoding::Vector{T} where {T<:Union{UInt8, UInt16}}
+    values::Vector{T} where {T<:Union{Float32, Float64}}
+
+    function SimpleMicroFloat(Bits, Prec)
+        encoding = SimpleFloat_encoding(Bits, Prec)
+        values = SimpleFloat_values(Bits, Prec)
+        new{Bits, Prec}(encoding, values)
+    end
 end
 
-function SimpleMicroFloat(bitwidth, precision)
-    values = map(μValue, construct_SimpleFloat(bitwidth, precision))
-    codings = map(μEncode, 0:((2^bitwidth)-1))
-    SimpleMicroFloat{bitwidth, precision}(values, codings)
-end
+struct SimpleFloat{Bits, Prec} <: AkoSimpleMicroFloat{Bits, Prec}
+    code::C where {C<:Union{UInt8, UInt16}}
+    value::V where {V<:Union{Float32, Float64}}
 
-struct SimpleFloat{BitWidth, Precision} <: AbstractSimpleFloat{BitWidth, Precision}
-    value::μValue
-    coding::μEncode
+    function SimpleFloat{Bits, Prec}(code::T, value::Real) where {T<:Union{UInt8, UInt16}}
+        V = T == UInt8 ? Float32 : Float64
+        return new{Bits, Prec}(code, T(value))
+    end
 end
-

@@ -5,7 +5,7 @@
 module SimpleMicroFloats
 
 export AbstractMicroFloat,
-       μEncode, μValue, μSafeEncode, μSafeValue,
+       n_values, bitsof, 
        SimpleMicroFloat, SimpleFloat
 
 include("P3109.jl")

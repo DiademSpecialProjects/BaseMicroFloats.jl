@@ -15,10 +15,10 @@ encoding(x::SimpleMicroFloat) = x.encoding
 Base.values(x::SimpleMicroFloat) = x.values
 
 bitwidth(::Type{SimpleMicroFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Bitwidth
-precision(::Type{SimpleMicroFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Precision
+Base.precision(::Type{SimpleMicroFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Precision
 
 bitwidth(x::SimpleMicroFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = bitwidth(typeof(x))
-precision(x::SimpleMicroFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = precision(typeof(x))
+Base.precision(x::SimpleMicroFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = precision(typeof(x))
 
 struct SimpleFloat{Bits, Prec} <: AkoSimpleMicroFloat{Bits, Prec}
     code::C where {C<:Union{UInt8, UInt16}}
@@ -37,10 +37,10 @@ code(x::SimpleMicroFloat) = x.code
 value(x::SimpleMicroFloat) = x.value
 
 bitwidth(::Type{SimpleFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Bitwidth
-precision(::Type{SimpleFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Precision
+Base.precision(::Type{SimpleFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Precision
 
 bitwidth(x::SimpleFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = bitwidth(typeof(x))
-precision(x::SimpleFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = precision(typeof(x))
+Base.precision(x::SimpleFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = precision(typeof(x))
 
 #=
 SMF21 = SimpleMicroFloat(2, 1)

@@ -21,4 +21,12 @@ struct SimpleFloat{Bits, Prec} <: AkoSimpleMicroFloat{Bits, Prec}
     end
 end
 
-SimpleFloat{Bits, Prec}(code, value) = SimpleFLoat(Bits, Prec, code, value)
+SMF21 = SimpleMicroFloat(2, 1)
+SMF31 = SimpleMicroFloat(3, 1)
+SMF32 = SimpleMicroFloat(3, 2)
+
+(T)(code, value) where {Bits, Prec, T<:SimpleMicroFloat{Bits, Prec}} = SimpleFloat{Bits, Prec}(code, value)
+
+smf21_0 = (SMF21)(0x00, 0.0)
+
+# SimpleFloat{Bits, Prec}(code, value) where {Bits, Prec} = SimpleFloat(Bits, Prec, code, value)

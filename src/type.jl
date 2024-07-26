@@ -15,9 +15,12 @@ struct SimpleFloat{Bits, Prec} <: AkoSimpleMicroFloat{Bits, Prec}
     code::C where {C<:Union{UInt8, UInt16}}
     value::V where {V<:Union{Float32, Float64}}
 
-    function SimpleFloat(Bits, Prec, code::T, value::Real) where {T<:Union{UInt8, UInt16}}
-        V = T == UInt8 ? Float32 : Float64
-        return new{Bits, Prec}(code, V(value))
+    function SimpleFloat{Bits, Prec}(code::UInt8, value::Float32)
+        return new{Bits,Prec}(code, value)
+    end
+
+    function SimpleFloat{Bits, Prec}(code::UInt16, value::Float64)
+        return new{Bits,Prec}(code, value)
     end
 end
 

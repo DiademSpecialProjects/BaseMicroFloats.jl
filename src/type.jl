@@ -11,6 +11,12 @@ struct SimpleMicroFloat{Bits, Prec} <: AkoSimpleMicroFloat{Bits, Prec}
     end
 end
 
+bitwidth(::Type{SimpleMicroFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Bitwidth
+precision(::Type{SimpleMicroFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Precision
+
+bitwidth(x::SimpleMicroFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = bitwidth(typeof(x))
+precision(x::SimpleMicroFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = precision(typeof(x))
+
 struct SimpleFloat{Bits, Prec} <: AkoSimpleMicroFloat{Bits, Prec}
     code::C where {C<:Union{UInt8, UInt16}}
     value::V where {V<:Union{Float32, Float64}}
@@ -24,16 +30,14 @@ struct SimpleFloat{Bits, Prec} <: AkoSimpleMicroFloat{Bits, Prec}
     end
 end
 
+bitwidth(::Type{SimpleFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Bitwidth
+precision(::Type{SimpleFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Precision
+
+bitwidth(x::SimpleFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = bitwidth(typeof(x))
+precision(x::SimpleFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = precision(typeof(x))
+
+#=
 SMF21 = SimpleMicroFloat(2, 1)
-SMF31 = SimpleMicroFloat(3, 1)
-SMF32 = SimpleMicroFloat(3, 2)
 
-bitwidth(::Type{SimpleMicroFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Bitwidth
-precision(::Type{SimpleMicroFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Precision
-
-bitwidth(x::SimpleMicroFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = bitwidth(typeof(x))
-precision(x::SimpleMicroFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = precision(typeof(x))
-
-# smf21_0 = SimpleFloat{bitwidth(SMF21), precision(SMF21)}(0x00, 0.0f0)
-
-# SimpleFloat{Bits, Prec}(code, value) where {Bits, Prec} = SimpleFloat(Bits, Prec, code, value)
+smf21_0 = SimpleFloat{bitwidth(SMF21), precision(SMF21)}(0x00, 0.0f0)
+=#

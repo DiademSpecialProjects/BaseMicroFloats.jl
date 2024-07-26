@@ -20,3 +20,5 @@ struct SimpleFloat{Bits, Prec} <: AkoSimpleMicroFloat{Bits, Prec}
         return new{Bits, Prec}(code, V(value))
     end
 end
+
+SimpleFloat{Bits, Prec}(code, value) = SimpleFLoat(Bits, Prec, code, value)

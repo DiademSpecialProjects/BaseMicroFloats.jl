@@ -9,8 +9,8 @@ export AbstractMicroFloat, AkoSimpleMicroFloat,
 
 include("shared.jl")
 
-include("type.jl")
 include("construct.jl")
+include("type.jl")
 
 include("aqua.jl")
 

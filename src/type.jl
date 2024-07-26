@@ -28,8 +28,8 @@ SMF32 = SimpleMicroFloat(3, 2)
 bitwidth(::Type{SimpleMicroFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Bitwidth
 precision(::Type{SimpleMicroFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Precision
 
-bitwidth(x::SimpleMicroFloat{Bitwidth, Precision}) = bitwidth(typeof(x))
-precision(x::SimpleMicroFloat{Bitwidth, Precision}) = precision(typeof(x))
+bitwidth(x::SimpleMicroFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = bitwidth(typeof(x))
+precision(x::SimpleMicroFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = precision(typeof(x))
 
 smf21_0 = SimpleFloat{bitwidth(SMF21), precision(SMF21)}(0x00, 0.0)
 

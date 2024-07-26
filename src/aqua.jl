@@ -1,4 +1,5 @@
-# defined by suggestion from Aqua to resolve ambiguities
+# defs follow suggestions from Aqua to resolve ambiguities
 
-SimpleFloat{BitWidth, Precision}(x::Real, rounding::RoundingMode) where {BitWidth, Precision} =
-   throw(ErrorException("Aqua ambiguity"))
+SimpleMicroFloat{BitWidth, Precision}(x::Real, rounding::RoundingMode) where {BitWidth, Precision} = nothing
+
+SimpleFloat{BitWidth, Precision}(x::Real, rounding::RoundingMode) where {BitWidth, Precision} = nothing

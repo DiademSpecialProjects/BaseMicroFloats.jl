@@ -7,8 +7,7 @@ module SimpleMicroFloats
 export AbstractMicroFloat, AkoSimpleMicroFloat, 
        SimpleMicroFloat,
        bitwidth, precision,
-       encoding, values, code, value,
-       consistent_rationals
+       encoding, values
 
 abstract type AbstractMicroFloat{BitWidth, Precision}  <: AbstractFloat end
 

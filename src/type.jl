@@ -20,30 +20,3 @@ Base.precision(::Type{SimpleMicroFloat{Bitwidth, Precision}}) where {Bitwidth, P
 bitwidth(x::SimpleMicroFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = bitwidth(typeof(x))
 Base.precision(x::SimpleMicroFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = precision(typeof(x))
 
-struct SimpleFloat{Bits, Prec} <: AkoSimpleMicroFloat{Bits, Prec}
-    code::C where {C<:Union{UInt8, UInt16}}
-    value::V where {V<:Union{Float32, Float64}}
-
-    function SimpleFloat{Bits, Prec}(code::UInt8, value::Float32) where {Bits, Prec}
-        return new{Bits,Prec}(code, value)
-    end
-
-    function SimpleFloat{Bits, Prec}(code::UInt16, value::Float64) where {Bits, Prec}
-        return new{Bits,Prec}(code, value)
-    end
-end
-
-code(x::SimpleMicroFloat) = x.code
-value(x::SimpleMicroFloat) = x.value
-
-bitwidth(::Type{SimpleFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Bitwidth
-Base.precision(::Type{SimpleFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Precision
-
-bitwidth(x::SimpleFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = bitwidth(typeof(x))
-Base.precision(x::SimpleFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = precision(typeof(x))
-
-#=
-SMF21 = SimpleMicroFloat(2, 1)
-
-smf21_0 = SimpleFloat{bitwidth(SMF21), precision(SMF21)}(0x00, 0.0f0)
-=#

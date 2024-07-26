@@ -9,10 +9,8 @@ function SimpleFloat_values(bitwidth, precision) # provide simple value sequence
     T = bitwidth <= 8 ? Float32 : Float64
     n_values = 2^bitwidth
     fraction_bits = precision - 1
-    n_fractions = 2^fraction_bits
-    n_fraction_cycles = div(n_values, n_fractions)
-    n_exponents = n_fraction_cycles
-    n_exponent_cycles = n_fractions
+    n_exponent_cycles = n_fractions = 2^fraction_bits
+    n_exponents = n_fraction_cycles = div(n_values, n_fractions)
     significands = SimpleFloat_significands(n_fractions, n_fraction_cycles)
     exponents = SimpleFloat_exponents(n_exponents, n_exponent_cycles)
     map(T, significands .* exponents)

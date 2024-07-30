@@ -1,6 +1,6 @@
 using Printf
 
-function show_consistent_rationals(encoding::Vector{E}, values::Vector{V}) where {E<:Integer, V<:Real}
+function show_consistent_rationals(encoding::Vector{E}, values::Vector{AbstractFloat}) where {E<:Integer}
     enc = map(hexstr, encoding)
     vals = consistent_rationals(values)
     z = zip(enc, vals)
@@ -21,7 +21,7 @@ function hexstr(x::Integer)
   "0x" * s
 end
 
-function consistent_rationals(xs::Vector{T}) where {T<:Real}
+function consistent_rationals(xs::Vector{AbstractFloat})
   n = length(xs)
   denoms = fill(maxdenom(xs), n)
   map((n,d)->string(n,"/",d), consistent_numers(xs), denoms)

@@ -1,5 +1,7 @@
+
+
 function consistent_rationals(xs)
-    consistent_numers(xs) .// maxdenom(xs)
+  map((n,d)->string(n,"/",d), consistent_numers(xs), fill(maxdenom(xs), length(xs)))
 end
 
 maxdenom(xs) = maximum(denominator.(rationalize.(xs)))

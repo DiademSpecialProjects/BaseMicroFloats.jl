@@ -1,4 +1,3 @@
-# defs follow suggestions from Aqua to resolve ambiguities
-
+# suggestion from Aqua.test_all(SimpleMicroFloats) to resolve ambiguities
 SimpleMicroFloat(::Real, ::RoundingMode) = nothing
-SimpleFloat(::Real, ::RoundingMode) = nothing
+

@@ -1,5 +1,3 @@
-abstract type AkoSimpleMicroFloat{BitWidth, Precision} <: AbstractMicroFloat{BitWidth, Precision} end
-
 struct SimpleMicroFloat{Bits, Prec} <: AkoSimpleMicroFloat{Bits, Prec}
     encoding::Vector{T} where {T<:Union{UInt8, UInt16}}
     values::Vector{T} where {T<:Union{Float32, Float64}}

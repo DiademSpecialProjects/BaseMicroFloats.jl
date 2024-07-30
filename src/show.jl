@@ -13,7 +13,7 @@ end
 
 # show_consistent_rationals(encoding(SMF87),vcat(0, diff( values(SMF87))))
 
-function hexstr(x::Integer)
+function hexstr(x::I) where {I<:Integer}
   s = @sprintf("%x", x)
   if x < 0x10
     s = "0" * s
@@ -24,10 +24,12 @@ end
 function consistent_rationals(xs::Vector{T}) where {T<:Real}
   n = length(xs)
   denoms = fill(maxdenom(xs), n)
-  map((n,d)->string(n,"/",d), consistent_numers(xs), denoms)
+  numers = consistent_numers(xs)
+  println((typeof(denoms), typeof(numers)))
+  map((n,d)->string(n,"/",d), numers, denoms)
 end
 
-maxdenom(xs::Vector{Real}) = maximum(denominator.(rationalize.(xs)))
+maxdenom(xs::Vector{T}) where {T<:Real} = maximum(denominator.(rationalize.(xs)))
 
 function consistent_numers(xs::Vector{T}) where {T<:Real}
     mx = maxdenom(xs)

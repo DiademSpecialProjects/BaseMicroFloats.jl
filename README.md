@@ -46,7 +46,7 @@ else
 end
 ```
 
-### In Use
+### example
 ```
 using SimpleMicroFloat
 

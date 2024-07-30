@@ -3,8 +3,8 @@ struct SimpleMicroFloat{BitWidth, Prec} <: AkoSimpleMicroFloat{BitWidth, Prec}
     values::Vector{T} where {T<:Union{Float32, Float64}}
 
     function SimpleMicroFloat(BitWidth, Prec)
-        encoding = SMF_encoding(BitWidth, Prec)
-        values = SMF_values(BitWidth, Prec)
+        encoding = AMF_encoding(BitWidth, Prec)
+        values = AMF_values(BitWidth, Prec)
         new{BitWidth, Prec}(encoding, values)
     end
 end

@@ -5,8 +5,8 @@ struct SimpleMicroFloat{Bits, Prec} <: AkoSimpleMicroFloat{Bits, Prec}
     values::Vector{T} where {T<:Union{Float32, Float64}}
 
     function SimpleMicroFloat(Bits, Prec)
-        encoding = SimpleFloat_encoding(Bits, Prec)
-        values = SimpleFloat_values(Bits, Prec)
+        encoding = SMF_encoding(Bits, Prec)
+        values = SMF_values(Bits, Prec)
         new{Bits, Prec}(encoding, values)
     end
 end

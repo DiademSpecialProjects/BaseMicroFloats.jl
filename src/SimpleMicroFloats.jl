@@ -1,7 +1,3 @@
-#=
-   confirm isbitstype
-=#
-
 module SimpleMicroFloats
 
 export AbstractMicroFloat, AkoSimpleMicroFloat, 
@@ -15,7 +11,5 @@ include("construct.jl")
 include("type.jl")
 
 include("aqua.jl")
-
-include("show.jl")
 
 end  # SimpleMicroFloats

@@ -1,3 +1,5 @@
+using Printf
+
 function show_consistent_rationals(encoding, values)
     enc = hexstr.(encoding)
     vals = consistent_rationals(values)

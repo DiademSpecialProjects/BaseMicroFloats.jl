@@ -1,7 +1,7 @@
 using Printf
 
 function show_consistent_rationals(encoding::Vector{E}, values::Vector{V}) where {E<:Integer, V<:Real}
-    enc = hexstr.(encoding)
+    enc = map(hexstr, encoding)
     vals = consistent_rationals(values)
     z = zip(enc, vals)
     s = """\n"""

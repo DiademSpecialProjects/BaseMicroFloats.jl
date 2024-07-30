@@ -33,7 +33,7 @@ maxdenom(xs::Vector{T}) where {T<:Real} = maximum(map(denominator, map(rationali
 
 function consistent_numers(xs::Vector{T}) where {T<:Real}
     mx = maxdenom(xs)
-    ys = rationalize.(xs)
+    ys = map(rationalize, xs)
     numrs = Int[]
     for y in ys
       n = numerator(y) * mx

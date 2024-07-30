@@ -16,4 +16,6 @@ include("type.jl")
 
 include("aqua.jl")
 
+include("show.jl")
+
 end  # SimpleMicroFloats

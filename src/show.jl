@@ -29,7 +29,7 @@ function consistent_rationals(xs::Vector{T}) where {T<:Real}
   map((n,d)->string(n,"/",d), numers, denoms)
 end
 
-maxdenom(xs::Vector{T}) where {T<:Real} = maximum(denominator.(rationalize.(xs)))
+maxdenom(xs::Vector{T}) where {T<:Real} = maximum(map(denominator, map(rationalize,xs)))
 
 function consistent_numers(xs::Vector{T}) where {T<:Real}
     mx = maxdenom(xs)

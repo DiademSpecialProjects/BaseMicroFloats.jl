@@ -1,6 +1,6 @@
 using Printf
 
-function show_consistent_rationals(encoding, values)
+function show_consistent_rationals(encoding::Vector{E}, values::Vector{V}) where {E, V}
     enc = hexstr.(encoding)
     vals = consistent_rationals(values)
     z = zip(enc, vals)
@@ -21,8 +21,10 @@ function hexstr(x)
   "0x" * s
 end
 
-function consistent_rationals(xs)
-  map((n,d)->string(n,"/",d), consistent_numers(xs), fill(maxdenom(xs), length(xs)))
+function consistent_rationals(xs::Vector{T}) where {T}
+  n = length(xs)
+  denoms = fill(maxdenom(xs), n)
+  map((n,d)->string(n,"/",d), consistent_numers(xs), denoms)
 end
 
 maxdenom(xs) = maximum(denominator.(rationalize.(xs)))

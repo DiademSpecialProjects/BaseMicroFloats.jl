@@ -4,8 +4,8 @@ export AbstractMicroFloat, AkoSimpleMicroFloat,
        SimpleMicroFloat, 
        bitwidth, precision, encoding, values
 
-abstract type AbstractMicroFloat{BitWidth, Precision}  <: AbstractFloat end
-abstract type AkoSimpleMicroFloat{BitWidth, Precision} <: AbstractMicroFloat{BitWidth, Precision} end
+abstract type AbstractMicroFloat{Bitwidth, Precision}  <: AbstractFloat end
+abstract type AkoSimpleMicroFloat{Bitwidth, Precision} <: AbstractMicroFloat{Bitwidth, Precision} end
 
 include("construct.jl")
 include("type.jl")

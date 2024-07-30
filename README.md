@@ -6,17 +6,17 @@
 
 ----
 
-SimpleMicroFloats.jl provides the concrete type `SimpleMicroFloat`, with the parameters `BitWidth` and `Precision`.
-- const SMF32 = SimpleMicroFloat(3, 2) # BitWidth = 3, Precision = 2
-- const SMF108 = SimpleMicroFloat(10, 8) # BitWidth = 10, Precision = 8
+SimpleMicroFloats.jl provides the concrete type `SimpleMicroFloat`, with the parameters `Bitwidth` and `Precision`.
+- const SMF32 = SimpleMicroFloat(3, 2) # Bitwidth = 3, Precision = 2
+- const SMF108 = SimpleMicroFloat(10, 8) # Bitwidth = 10, Precision = 8
 
 #### The parameters are available
 - SMF32bitwidth = bitwidth(SMF32)
 - SMF32precision = precision(SMF32)
 
 A `SimpleMicroFloat` contains two fields, `encoding` and `values`.
-- `encoding` holds the sequence of value encodings for the specified BitWidth and Precision
-- `values` holds the sequence floating-point values  for the specified BitWidth and Precision
+- `encoding` holds the sequence of value encodings for the specified Bitwidth and Precision
+- `values` holds the sequence floating-point values  for the specified Bitwidth and Precision
 
 #### The fields are available
 - SMF32encoding = encoding(SMF32)
@@ -37,7 +37,7 @@ A `SimpleMicroFloat` contains two fields, `encoding` and `values`.
 
 #### Types used
 ```
-if the BitWidth is <= 8
+if the Bitwidth is <= 8
     the encoding is a vector of UInt8
     the values are a vector of Float32
 else

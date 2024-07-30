@@ -25,8 +25,9 @@ A `SimpleMicroFloat` contains two fields, `encoding` and `values`.
 ### Technical Notes
 
 #### SimpleMicroFloats are used to construct other MicroFloat types
-- see UnsignedMicroFloats.jl
-- see SignedMicroFloats.jl
+- they are not intended for direct use
+  - see UnsignedMicroFloats.jl
+  - see SignedMicroFloats.jl
 
 #### The values of a SimpleMicroFloat are finite non-negative numbers:
 - there is one 0

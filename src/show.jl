@@ -1,5 +1,3 @@
-
-
 function consistent_rationals(xs)
   map((n,d)->string(n,"/",d), consistent_numers(xs), fill(maxdenom(xs), length(xs)))
 end

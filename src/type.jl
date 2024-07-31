@@ -17,4 +17,3 @@ Base.precision(::Type{SimpleMicroFloat{Bitwidth, Precision}}) where {Bitwidth, P
 
 bitwidth(x::SimpleMicroFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = bitwidth(typeof(x))
 Base.precision(x::SimpleMicroFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = precision(typeof(x))
-

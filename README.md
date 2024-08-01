@@ -7,20 +7,20 @@
 ----
 
 BaseMicroFloats.jl provides the concrete type `BaseMicroFloat`, with the parameters `Bitwidth` and `Precision`.
-- const SMF32 = BaseMicroFloat(3, 2) # Bitwidth = 3, Precision = 2
-- const SMF108 = BaseMicroFloat(10, 8) # Bitwidth = 10, Precision = 8
+- const MF32 = BaseMicroFloat(3, 2) # Bitwidth = 3, Precision = 2
+- const MF108 = BaseMicroFloat(10, 8) # Bitwidth = 10, Precision = 8
 
 #### The parameters are available
-- SMF32bitwidth = bitwidth(SMF32)
-- SMF32precision = precision(SMF32)
+- MF32bitwidth = bitwidth(SMF32)
+- MF32precision = precision(SMF32)
 
 A `BaseMicroFloat` contains two fields, `encoding` and `values`.
 - `encoding` holds the sequence of value encodings for the specified Bitwidth and Precision
 - `values` holds the sequence floating-point values  for the specified Bitwidth and Precision
 
 #### The fields are available
-- SMF32encoding = encoding(SMF32)
-- SMF32values = values(SMF32)
+- MF32encoding = encoding(MF32)
+- MF32values = values(MF32)
 
 ### Technical Notes
 
@@ -50,17 +50,17 @@ end
 ```
 using BaseMicroFloat
 
-SMF32 = BaseMicroFloat(3, 2);
+MF32 = BaseMicroFloat(3, 2);
 
-bitwidth(SMF32)
+bitwidth(MF32)
 # 3
 
-precision(SMF32)
+precision(MF32)
 # 2
 
-encoding(SMF32)
+encoding(MF32)
 # [0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07]
 
-values(SMF32)
+values(MF32)
 # [0.0, 0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0]
 ```

@@ -1,3 +1,3 @@
-# suggestion from Aqua.test_all(SimpleMicroFloats) to resolve ambiguities
-SimpleMicroFloat(::Real, ::RoundingMode) = nothing
+# suggestion from Aqua.test_all(BaseMicroFloats) to resolve ambiguities
+BaseMicroFloat(::Real, ::RoundingMode) = nothing
 

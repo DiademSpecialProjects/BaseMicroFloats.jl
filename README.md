@@ -1,4 +1,4 @@
-# SimpleMicroFloats.jl
+# BaseMicroFloats.jl
 ### The internal constructive model for MicroFloats.
 ##### Copyright 2024 by Jeffrey Sarnoff
 
@@ -6,15 +6,15 @@
 
 ----
 
-SimpleMicroFloats.jl provides the concrete type `SimpleMicroFloat`, with the parameters `Bitwidth` and `Precision`.
-- const SMF32 = SimpleMicroFloat(3, 2) # Bitwidth = 3, Precision = 2
-- const SMF108 = SimpleMicroFloat(10, 8) # Bitwidth = 10, Precision = 8
+BaseMicroFloats.jl provides the concrete type `BaseMicroFloat`, with the parameters `Bitwidth` and `Precision`.
+- const SMF32 = BaseMicroFloat(3, 2) # Bitwidth = 3, Precision = 2
+- const SMF108 = BaseMicroFloat(10, 8) # Bitwidth = 10, Precision = 8
 
 #### The parameters are available
 - SMF32bitwidth = bitwidth(SMF32)
 - SMF32precision = precision(SMF32)
 
-A `SimpleMicroFloat` contains two fields, `encoding` and `values`.
+A `BaseMicroFloat` contains two fields, `encoding` and `values`.
 - `encoding` holds the sequence of value encodings for the specified Bitwidth and Precision
 - `values` holds the sequence floating-point values  for the specified Bitwidth and Precision
 
@@ -24,12 +24,12 @@ A `SimpleMicroFloat` contains two fields, `encoding` and `values`.
 
 ### Technical Notes
 
-#### SimpleMicroFloats are used to construct other MicroFloat types
+#### BaseMicroFloats are used to construct other MicroFloat types
 - they are not intended for direct use
   - see UnsignedMicroFloats.jl
   - see SignedMicroFloats.jl
 
-#### The values of a SimpleMicroFloat are finite non-negative numbers:
+#### The values of a BaseMicroFloat are finite non-negative numbers:
 - there is one 0
 - there are no negative values
 - there are no NaNs
@@ -48,9 +48,9 @@ end
 
 ### example
 ```
-using SimpleMicroFloat
+using BaseMicroFloat
 
-SMF32 = SimpleMicroFloat(3, 2);
+SMF32 = BaseMicroFloat(3, 2);
 
 bitwidth(SMF32)
 # 3

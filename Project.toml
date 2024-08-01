@@ -1,4 +1,4 @@
-name = "SimpleMicroFloats"
+name = "BaseMicroFloats"
 author = "Jeffrey Sarnoff <jeffrey.sarnoff@ieee.org>"
 uuid = "0d084faf-cabf-4f0f-985a-e7de46fcaf31"
 version = "0.1.0"

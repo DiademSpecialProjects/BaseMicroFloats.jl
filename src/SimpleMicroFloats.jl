@@ -1,16 +1,16 @@
-module SimpleMicroFloats
+module BaseMicroFloats
 
-export AbstractMicroFloat, AkoSimpleMicroFloat, 
-       SimpleMicroFloat, 
+export AbstractMicroFloat, AkoBaseMicroFloat, 
+       BaseMicroFloat, 
        bitwidth, precision, encoding, values,
        nvalues, nfractions, nexponents, nfractioncycles, nexponentcycles
 
 abstract type AbstractMicroFloat{Bitwidth, Precision}  <: AbstractFloat end
-abstract type AkoSimpleMicroFloat{Bitwidth, Precision} <: AbstractMicroFloat{Bitwidth, Precision} end
+abstract type AkoBaseMicroFloat{Bitwidth, Precision} <: AbstractMicroFloat{Bitwidth, Precision} end
 
 include("construct.jl")
 include("type.jl")
 
 include("aqua.jl")
 
-end  # SimpleMicroFloats
+end  # BaseMicroFloats

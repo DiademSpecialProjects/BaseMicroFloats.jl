@@ -22,9 +22,12 @@ nbits(::Type{SimpleMicroFloat{Bitwidth, Precision}}) where {Bitwidth, Precision}
 nfractionbits(::Type{SimpleMicroFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Precision - 1
 nexponentbits(::Type{SimpleMicroFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Bitwidth - Precision + 1
 nvalues(::Type{T}) where {Bitwidth, Precision, T<:SimpleMicroFloat{Bitwidth, Precision}} = 2^nbits(T)
-nfractionvalues(::Type{T}) where {Bitwidth, Precision, T<:SimpleMicroFloat{Bitwidth, Precision}} = 2^nfractionbits(T)
-nexponentvalues(::Type{T}) where {Bitwidth, Precision, T<:SimpleMicroFloat{Bitwidth, Precision}} = 2^nexponentbits(T)
+nfractions(::Type{T}) where {Bitwidth, Precision, T<:SimpleMicroFloat{Bitwidth, Precision}} = 2^nfractionbits(T)
+nexponents(::Type{T}) where {Bitwidth, Precision, T<:SimpleMicroFloat{Bitwidth, Precision}} = 2^nexponentbits(T)
+nfractioncycles(::Type{T}) where {Bitwidth, Precision, T<:SimpleMicroFloat{Bitwidth, Precision}} = nexponents(T)
+nexponentcycles(::Type{T}) where {Bitwidth, Precision, T<:SimpleMicroFloat{Bitwidth, Precision}} = nfractions(T)
 
-for F in (:nbits, :nfractionbits, :nexponentbits, :nvalues, :nfractionvalues, :nexponentvalues)
+for F in (:nbits, :nfractionbits, :nexponentbits, :nvalues, 
+          :nfractions, :nexponents, :nfractioncycles, :nexponentcycles)
     @eval $F(x::T) where {T<:SimpleMicroFloat} = $F(T)
 end

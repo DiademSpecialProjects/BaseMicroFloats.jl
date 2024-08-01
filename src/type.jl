@@ -17,3 +17,14 @@ Base.precision(::Type{SimpleMicroFloat{Bitwidth, Precision}}) where {Bitwidth, P
 
 bitwidth(x::SimpleMicroFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = bitwidth(typeof(x))
 Base.precision(x::SimpleMicroFloat{Bitwidth, Precision}) where {Bitwidth, Precision} = precision(typeof(x))
+
+nbits(::Type{SimpleMicroFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Bitwidth
+nfractionbits(::Type{SimpleMicroFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Precision - 1
+nexponentbits(::Type{SimpleMicroFloat{Bitwidth, Precision}}) where {Bitwidth, Precision} = Bitwidth - Precision + 1
+nvalues(::Type{T}) where {Bitwidth, Precision, T<:SimpleMicroFloat{Bitwidth, Precision}} = 2^nbits(T)
+nfractionvalues(::Type{T}) where {Bitwidth, Precision, T<:SimpleMicroFloat{Bitwidth, Precision}} = 2^nfractionbits(T)
+nexponentvalues(::Type{T}) where {Bitwidth, Precision, T<:SimpleMicroFloat{Bitwidth, Precision}} = 2^nexponentbits(T)
+
+for F in (:nbits, :nfractionbits, :nexponentbits, :nvalues, :nfractionvalues, :nexponentvalues)
+    @eval $F(x::T) where {T<:SimpleMicroFloat} = $F(T)
+end

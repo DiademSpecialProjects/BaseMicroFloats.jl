@@ -1,0 +1,31 @@
+using BaseMicroFloats, Test
+
+const FLOAT = Union{Float64, Float32, Float16}
+
+MF31 = BaseMicroFloat(3,1);
+MF32 = BaseMicroFloat(3,2);
+MF41 = BaseMicroFloat(4,1);
+MF42 = BaseMicroFloat(4,2);
+MF43 = BaseMicroFloat(4,3);
+MF51 = BaseMicroFloat(5,1);
+MF52 = BaseMicroFloat(5,2);
+MF53 = BaseMicroFloat(5,3);
+MF54 = BaseMicroFloat(5,4);
+MF61 = BaseMicroFloat(6,1);
+MF62 = BaseMicroFloat(6,2);
+MF63 = BaseMicroFloat(6,3);
+MF64 = BaseMicroFloat(6,4);
+MF65 = BaseMicroFloat(6,5);
+
+M32idx3 = values(MF32)[3];
+M32idx4 = values(MF52)[4];
+M32idx5 = values(MF32)[5];
+
+M53idx25 = values(MF53)[25];
+M53idx26 = values(MF53)[26];
+M53idx27 = values(MF53)[27];
+
+M63idx46 = values(MF63)[46];
+M63idx47 = values(MF63)[47];
+M63idx48 = values(MF63)[48];
+

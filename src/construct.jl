@@ -1,4 +1,3 @@
-BMF_n_values(bitwidth, precision) = 
 function BMF_encoding(bitwidth, precision) # provide encoding sequence
     T = bitwidth <= 8 ? UInt8 : UInt16
     n_values = 2^bitwidth

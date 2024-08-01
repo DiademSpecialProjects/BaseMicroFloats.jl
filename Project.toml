@@ -1,6 +1,6 @@
 name = "BaseMicroFloats"
 author = "Jeffrey Sarnoff <jeffrey.sarnoff@ieee.org>"
-uuid = "0d084faf-cabf-4f0f-985a-e7de46fcaf31"
+uuid = "f73e857c-9931-4f62-811b-cdda1686d046"
 version = "0.1.0"
 
 [compat]

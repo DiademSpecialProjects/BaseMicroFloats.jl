@@ -42,9 +42,10 @@ function mfvalue_to_offset(x::T, idx)  where {K,P,T<:BaseMicroFloat{K,P}}
 
      expfield = exponent_field(val)
      expfieldivalue = exponent_field_ivalue(val)
+     expfieldcorrected = exponent_field_corrected_ivalue(K, P, val)
      fracfieldivalue = fraction_field_ivalue(val)
 
-     (; value=(;val,fr,xp), nfracs, nexps, nfraccycles, nexpcycles, expfieldivalue, fracfieldivalue)
+     (; value=(;val,fr,xp), nfracs, nexps, nfraccycles, nexpcycles, expfieldivalue, expfieldcorrected, fracfieldivalue)
 end
 
 exponent_field(x::T) where {T<:FLOAT} =
@@ -62,6 +63,8 @@ fraction_field_ivalue(K, P, x::T) where {T<:FLOAT} =
 exponent_field_ivalue(K, P, x::T) where {T<:FLOAT} =
     (exponent_field_ivalue(x) >> (Base.exponent_bits(T) - P))
 
+exponent_field_corrected_ivalue(K, P, x::T) where {T<:FLOAT} = 
+    1 << 2^(exponent_field_ivalue(x) - Base.exponent_bias(T))
 
   
   

@@ -29,8 +29,8 @@ M63idx46 = values(MF63)[46];
 M63idx47 = values(MF63)[47];
 M63idx48 = values(MF63)[48];
 
-function mfvalue_to_offset(::Type{T}, idx)
-     val = values(T)[idx]
+function mfvalue_to_offset(x::T, idx)  where {K,P,T<:BaseMicroFloat{K,P}}
+     val = values(x)[idx]
      nvals = nvalues(T)
      nfracs = nfractions(T)
      nexps = nexponents(T)
@@ -39,6 +39,12 @@ function mfvalue_to_offset(::Type{T}, idx)
 
      fr, xp = frexp(val)
      frT = typeof(fr)
+
+     expfield = exponent_field(val)
+     expfieldivalue = exponent_field_ivalue(val)
+     fracfieldivalue = fraction_field_ivalue(val)
+
+     (; value=(;val,fr,xp), nfracs, nexps, nfraccycles, nexpcycles, expfieldivalue, fracfieldivalue)
 end
 
 
@@ -50,7 +56,6 @@ exponent_field_ivalue(x::T) where {T<:FLOAT} =
 
 fraction_field_ivalue(x::T) where {T<:FLOAT} =
     reinterpret(Unsigned, x) & Base.significand_mask(T)
-
 
 fraction_field_ivalue(K, P, x::T) where {T<:FLOAT} =
     fraction_field_ivalue(x) >> (Base.precision(T) - P)

@@ -10,24 +10,24 @@ function BMF_values(bitwidth, precision) # provide simple value sequence
     n_values = 2^bitwidth
     n_exponent_cycles = n_fractions = 2^(precision - 1) # 2^fraction_bits
     n_exponents = n_fraction_cycles = div(n_values, n_fractions)
-    map(T, BMF_significand_series(n_fractions, n_fraction_cycles) .* BMF_exponent_series(n_exponents, n_exponent_cycles))
+    map(T, significand_series(n_fractions, n_fraction_cycles) .* BMF_exponent_series(n_exponents, n_exponent_cycles))
 end
 
-function BMF_significand_series(n_fractions, n_fraction_cycles)
+function significand_series(n_fractions, n_fraction_cycles)
     fraction_sequence = (0:n_fractions-1) .// n_fractions
     normal_sequence = 1 .+ fraction_sequence
     append!(fraction_sequence, repeat(normal_sequence, n_fraction_cycles - 1))
 end
 
-Base.exponent_bias(n_exponent_values::Integer) = n_exponent_values >> 1
+BMF_exponent_bias(n_exponent_values::Integer) = n_exponent_values >> 1
 
 function BMF_exponent_series(n_exponents, n_exponent_cycles)
-    biased_exponents = BMF_biasedexponents(n_exponents, n_exponent_cycles)
+    biased_exponents = biasedexponent_series(n_exponents, n_exponent_cycles)
     map(x->2.0^x, biased_exponents)
 end
 
-function BMF_biasedexponents(n_exponents, n_exponent_cycles) 
-    bias = Base.exponent_bias(n_exponents)
+function biasedexponent_series(n_exponents, n_exponent_cycles) 
+    bias = BMF_exponent_bias(n_exponents)
     biased_exponents = collect( (0:n_exponents-1) .- bias )
     # exponent for subnormals equals the minimum exponent for normals
     biased_exponents[1] = biased_exponents[2]

@@ -11,10 +11,10 @@ function BMF_values(bitwidth, precision) # provide simple value sequence
     n_values = 2^bitwidth
     n_exponent_cycles = n_fractions = 2^(precision - 1) # 2^fraction_bits
     n_exponents = n_fraction_cycles = div(n_values, n_fractions)
-    map(T, BMF_significands(n_fractions, n_fraction_cycles) .* BMF_exponents(n_exponents, n_exponent_cycles))
+    map(T, BMF_significand_series(n_fractions, n_fraction_cycles) .* BMF_exponent_series(n_exponents, n_exponent_cycles))
 end
 
-function BMF_significands(n_fractions, n_fraction_cycles)
+function BMF_significand_series(n_fractions, n_fraction_cycles)
     fraction_sequence = (0:n_fractions-1) .// n_fractions
     normal_sequence = 1 .+ fraction_sequence
     append!(fraction_sequence, repeat(normal_sequence, n_fraction_cycles - 1))
@@ -22,7 +22,7 @@ end
 
 Base.exponent_bias(n_exponent_values::Integer) = n_exponent_values >> 1
 
-function BMF_exponents(n_exponents, n_exponent_cycles)
+function BMF_exponent_series(n_exponents, n_exponent_cycles)
     biased_exponents = BMF_biasedexponents(n_exponents, n_exponent_cycles)
     map(x->2.0^x, biased_exponents)
 end

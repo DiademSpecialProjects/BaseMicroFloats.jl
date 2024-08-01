@@ -47,7 +47,6 @@ function mfvalue_to_offset(x::T, idx)  where {K,P,T<:BaseMicroFloat{K,P}}
      (; value=(;val,fr,xp), nfracs, nexps, nfraccycles, nexpcycles, expfieldivalue, fracfieldivalue)
 end
 
-
 exponent_field(x::T) where {T<:FLOAT} =
     reinterpret(Unsigned, x) & Base.exponent_mask(T)
 

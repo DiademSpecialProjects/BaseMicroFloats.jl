@@ -29,3 +29,36 @@ M63idx46 = values(MF63)[46];
 M63idx47 = values(MF63)[47];
 M63idx48 = values(MF63)[48];
 
+function mfvalue_to_offset(::Type{T}, idx)
+     val = values(T)[idx]
+     nvals = nvalues(T)
+     nfracs = nfractions(T)
+     nexps = nexponents(T)
+     nfraccycles = nfractioncycles(T)
+     nexpcycles = nexponentcycles(T)
+
+     fr, xp = frexp(val)
+     frT = typeof(fr)
+end
+
+
+exponent_field(x::T) where {T<:FLOAT} =
+    reinterpret(Unsigned, x) & Base.exponent_mask(T)
+
+exponent_field_ivalue(x::T) where {T<:FLOAT} =
+    exponent_field(x) >> Base.significand_bits(T)
+
+fraction_field_ivalue(x::T) where {T<:FLOAT} =
+    reinterpret(Unsigned, x) & Base.significand_mask(T)
+
+
+fraction_field_ivalue(K, P, x::T) where {T<:FLOAT} =
+    fraction_field_ivalue(x) >> (Base.precision(T) - P)
+
+exponent_field_ivalue(K, P, x::T) where {T<:FLOAT} =
+    (exponent_field_ivalue(x) >> (Base.exponent_bits(T) - P))
+
+
+  
+  
+  

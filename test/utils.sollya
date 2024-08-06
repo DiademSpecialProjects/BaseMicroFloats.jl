@@ -65,3 +65,22 @@ procedure rnprecxs(p, lstofcoeffs) {
   };
   return lst;
 };
+
+procedure ruprecxs(p, lstofcoeffs) {
+  lst = [| |];
+  for c in lstofcoeffs do {
+    cf = [| ruprec(p, c) |];
+    lst = lst @ cf;
+  };
+  return lst;
+};
+
+procedure rdprecxs(p, lstofcoeffs) {
+  lst = [| |];
+  for c in lstofcoeffs do {
+    cf = [| rdprec(p, c) |];
+    lst = lst @ cf;
+  };
+  return lst;
+};
+

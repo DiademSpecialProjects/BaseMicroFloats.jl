@@ -227,7 +227,7 @@ procedure findnearfaithfulvalues(xs, x) {
 };
 
 midpointmode = on!;
-prec = 32;
+prec = 64;
 
 procedure minimax(fnx, dg, lo, hi) {
   ply = fpminimax(fnx, dg, [|HP...|], [lo; hi]);

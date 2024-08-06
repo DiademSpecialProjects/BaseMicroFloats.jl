@@ -129,12 +129,13 @@ procedure findnearfaithfulvalues(xs, x) {
     return vals;
 };
 
+midpointmode = on!;
 prec = 32;
 
 procedure minimax(fnx, dg, lo, hi) {
   ply = fpminimax(fnx, dg, [|HP...|], [lo; hi]);
-  mxerr = supnorm(ply, fnx, [lo; hi], absolute, 2^(-16))[1];
-  return [| ply, mxerr |];
+  mxerr = supnorm(ply, fnx, [lo; hi], absolute, 2^(-16));
+  return [| ply, sup(mxerr) |];
 };
 
 # [|1.0107421875 + x * (0.9116210937 + x * 0.7280273437), [1.6170038762553e-4;1.617027778729e-4]|]

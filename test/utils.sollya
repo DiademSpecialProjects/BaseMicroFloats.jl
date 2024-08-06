@@ -49,3 +49,24 @@ procedure rdprecxs(p, lstofcoeffs) {
   return lst;
 };
 
+#=
+ > p = remez(exp(x), 5, [-1;1]);
+   > midpointmode=on!;
+   > supnorm(p, exp(x), [-1;1], absolute, 2^(-40));
+   0.45205513967~0/2~e-4
+
+     > midpointmode=on!;
+   > d = [1;2];
+   > f = exp(cos(x)^2 + 1);
+   > p = remez(1,15,d,1/f,1e-40);
+   > theta=1b-60;
+   > prec=default!;
+   > mode=relative;
+   > supnorm(p,f,d,mode,theta);
+   0.30893006200251428~5/6~e-13
+
+   P = fpminimax(sin(x),6,[|32...|],[-1b-5;1b-5], fixed, absolute);
+   P = fpminimax(exp(x), [|3,4|], [|D,24|], [-1/256; 1/246], 1+x+x^2/2);
+
+=#
+

@@ -1,3 +1,106 @@
+# degree(poly) the degree of poly
+# coeff(poly, n) the coeff of degree n in poly
+#  while (expm1(i) > 0) do { expm1(i); i := i - 1; };
+# > for i from 1 to 5 do print ("Hello world",i)
+
+w;
+
+dieonerrormode=off!;
+/* decimal|binary|dyadic|powers|hexadecimal */
+display=dyadic!; 
+midpointmode=on!;
+rationalmode=off!;
+timing=off!;
+autosimplify=on!;
+fullparentheses=off!;
+verbosity=1!;
+roundingwarnings=off!;
+taylorrecursions=3!;
+hopitalrecursions=3!;
+roundingwarnings=off!;
+
+
+
+/* basic list handling */
+/*
+    reverse(list)
+    
+    prepend(item, list)
+    postpend(list, item)
+    append(list, list)
+
+    dropfirst(list)
+    droplast(list)
+    dropidx(list, idx)       -- idx==0 drops first, idx==length(list)-1 drops last
+*/
+
+procedure reverse(lst) {
+  var res, lastidx, i;
+  res = [| |];
+  lastidx = length(lst) - 1;
+  if lastidx >= 0 then {
+    for i from 0 to lastidx do { res = res :. lst[lastidx-i]; };
+  };
+  return res;
+};
+
+prepend  = proc(itm, lst) { return [|itm|] @ lst; };
+postpend = proc(lst, itm) { return lst :. itm; };
+append   = proc(lst1, lst2) { return lst1 @ lst2; };
+
+dropfirst = proc(lst) { return tail(lst); };
+droplast  = proc(lst) { return reverse(tail(reverse(lst))); };
+
+procedure dropidx(lst, idx) {
+  var res, lastidx, i;
+  res = [| |];
+  lastidx = length(lst) - 1;
+  if (idx==0) then res = dropfirst(lst) else {
+    if (idx==lastidx) then res = droplast(lst) else {
+      for i from 0 to lastidx do { if (i!=idx) then res = res :. lst[i]; };
+    };  
+  };
+  return res;
+};
+
+/*
+                                 idx==0 prepends, idx==length(list) postpends
+    inpend(list, idx, list2)  -- appends internally without nesting list2
+    insert(list, idx, item)   -- inserts internally, if item is a list, it nests
+    
+*/
+
+procedure insert(lst, idx, itm) {
+  var res, n, lastidx, i;
+  res = [| |];
+  n = length(lst);
+  lastidx = n - 1;
+  if (idx==0) then res = prepend(itm,lst) else {
+    if (idx==n) then res = postpend(lst,itm) else {
+      for i from 0 to (idx-1) do { res = res :. lst[i]; };
+      res = res :. itm;
+      for i from idx to lastidx do { res = res :. lst[i]; };
+    };  
+  };
+  return res;
+};
+
+procedure inpend(lst, idx, lst2) {
+ var res, n, lastidx, i;
+  res = [| |];
+  n = length(lst);
+  lastidx = n - 1;
+  if (idx==0) then res = append(lst2,lst) else {
+    if (idx==n) then res = append(lst,lst2) else {
+      for i from 0 to (idx-1) do { res = res :. lst[i]; };
+      res = append(res, lst2);
+      for i from idx to lastidx do { res = res :. lst[i]; };
+    };  
+  };
+  return res;
+};
+
+
 w;
 
 procedure intexp(x) { return [| mantissa(x), exponent(x) |]; };
@@ -5,11 +108,6 @@ procedure intexp(x) { return [| mantissa(x), exponent(x) |]; };
 procedure rnprec(p, x) { return round(x, p, RN); };
 procedure ruprec(p, x) { return round(x, p, RU); };
 procedure rdprec(p, x) { return round(x, p, RD); };
-
-# degree(poly) the degree of poly
-# coeff(poly, n) the coeff of degree n in poly
-#  while (expm1(i) > 0) do { expm1(i); i := i - 1; };
-# > for i from 1 to 5 do print ("Hello world",i)
 
 procedure listofcoeffs(poly) {
   mindeg = 0;
@@ -68,7 +166,7 @@ m76wide = [| 0.0, 0.015625, 0.03125, 0.046875, 0.0625, 0.078125, 0.09375, 0.1093
 m76 = rnprecxs(6, m76wide);
 
 
-#=
+/*
  > p = remez(exp(x), 5, [-1;1]);
    > midpointmode=on!;
    > supnorm(p, exp(x), [-1;1], absolute, 2^(-40));
@@ -86,8 +184,7 @@ m76 = rnprecxs(6, m76wide);
 
    P = fpminimax(sin(x),6,[|32...|],[-1b-5;1b-5], fixed, absolute);
    P = fpminimax(exp(x), [|3,4|], [|D,24|], [-1/256; 1/246], 1+x+x^2/2);
-
-=#
+*/
 
 procedure findfaithfulidxs(xs, x) {
     n = length(xs);
@@ -137,5 +234,15 @@ procedure minimax(fnx, dg, lo, hi) {
   mxerr = supnorm(ply, fnx, [lo; hi], absolute, 2^(-16));
   return [| ply, sup(mxerr) |];
 };
+
+exp2deg0qrtr = minimax(exp(w), 2, 0.0, 0.25);
+exp3deg0qrtr = minimax(exp(w), 3, 0.0, 0.25);
+
+exp2degqrtrhalf = minimax(exp(w), 2, 0.25, 0.5);
+exp3degqrtrhalf = minimax(exp(w), 3, 0.25, 0.5);
+
+exp2deghalf1 = minimax(exp(w), 2, 0.5, 1.0);
+exp3deghalf1 = minimax(exp(w), 3, 0.5, 1.0);
+
 
 # [|1.0107421875 + x * (0.9116210937 + x * 0.7280273437), [1.6170038762553e-4;1.617027778729e-4]|]

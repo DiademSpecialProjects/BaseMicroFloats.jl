@@ -1,11 +1,11 @@
-function encoding(bitwidth, precision) # provide encoding sequence
+function encoding(bitwidth, sigbits) # provide encoding sequence
     T = bitwidth <= 8 ? UInt8 : UInt16
     n_values = 2^bitwidth
     v = Vector{T}(undef, n_values)
     v .= T(0):T(n_values-1) # the value of the last line in a function is returned
 end
 
-function Base.values(bitwidth, precision) # provide simple value sequence
+function Base.values(bitwidth, sigbits) # provide simple value sequence
     T = bitwidth <= 8 ? Float32 : Float64
     n_values = 2^bitwidth
     n_exponent_cycles = n_fractions = 2^(precision - 1) # 2^fraction_bits

@@ -135,7 +135,7 @@ fraction_field_ivalue(x::T) where {T<:FLOAT} =
     reinterpret(Unsigned, x) & Base.significand_mask(T)
 
 fraction_field_ivalue(K, P, x::T) where {T<:FLOAT} =
-    fraction_field_ivalue(x) >> (Base.precision(T) - P)
+    fraction_field_ivalue(x) >> (Base.sigbits)(T) - P)
 
 exponent_field_ivalue(K, P, x::T) where {T<:FLOAT} =
     (exponent_field_ivalue(x) >> (Base.exponent_bits(T) - P))

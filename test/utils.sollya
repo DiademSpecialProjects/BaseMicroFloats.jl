@@ -6,45 +6,10 @@ procedure rnprec(p, x) { return round(x, p, RN); };
 procedure ruprec(p, x) { return round(x, p, RU); };
 procedure rdprec(p, x) { return round(x, p, RD); };
 
-procedure rn1(x) { return rnprec(1,x); };
-procedure rn2(x) { return rnprec(2,x); };
-procedure rn3(x) { return rnprec(3,x); };
-procedure rn4(x) { return rnprec(4,x); };
-procedure rn5(x) { return rnprec(5,x); };
-procedure rn6(x) { return rnprec(6,x); };
-procedure rn7(x) { return rnprec(7,x); };
-procedure rn8(x) { return rnprec(8,x); };
-procedure rn9(x) { return rnprec(9,x); };
-procedure rn10(x) { return rnprec(10,x); };
-
-procedure ru1(x) { return ruprec(1,x); };
-procedure ru2(x) { return ruprec(2,x); };
-procedure ru3(x) { return ruprec(3,x); };
-procedure ru4(x) { return ruprec(4,x); };
-procedure ru5(x) { return ruprec(5,x); };
-procedure ru6(x) { return ruprec(6,x); };
-procedure ru7(x) { return ruprec(7,x); };
-procedure ru8(x) { return ruprec(8,x); };
-procedure ru9(x) { return ruprec(9,x); };
-procedure ru10(x) { return ruprec(10,x); };
-
-procedure rd1(x) { return rdprec(1,x); };
-procedure rd2(x) { return rdprec(2,x); };
-procedure rd3(x) { return rdprec(3,x); };
-procedure rd4(x) { return rdprec(4,x); };
-procedure rd5(x) { return rdprec(5,x); };
-procedure rd6(x) { return rdprec(6,x); };
-procedure rd7(x) { return rdprec(7,x); };
-procedure rd8(x) { return rdprec(8,x); };
-procedure rd9(x) { return rdprec(9,x); };
-procedure rd10(x) { return rdprec(10,x); };
-
 # degree(poly) the degree of poly
 # coeff(poly, n) the coeff of degree n in poly
 #  while (expm1(i) > 0) do { expm1(i); i := i - 1; };
 # > for i from 1 to 5 do print ("Hello world",i)
-
-procedure listify(x) { [| x |]; };
 
 procedure listofcoeffs(poly) {
   mindeg = 0;

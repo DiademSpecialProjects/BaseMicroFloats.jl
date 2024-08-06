@@ -89,4 +89,22 @@ m76 = rnprecxs(6, m76wide);
 
 =#
 
-fnexp = 
+procedure findfaithful(xs, x) {
+    n = length(xs);
+    k = n;
+    for i from 0 to n-1 do {
+        if x >= xs[i] then {
+           k = i;
+        };
+    };
+    if k == n then {
+        result = [| n, n |];
+    } else {
+        if (x == xs[k]) then {
+           result = [| k, k |];
+        } else {
+           result = [| k, k+1 |];
+        };
+    };
+    return result;
+};

@@ -114,3 +114,17 @@ procedure findfaithfulvalues(xs, x) {
   result = [| xs[idxs[1]], xs[idxs[2]] |];
   return result;
 };
+
+procedure findnearfaithfulidxs(xs, x) {
+   idxs = findfaithfulidxs(xs, x);
+   idx0 = max(0, idxs[0]-1);
+   idx3 = min(length(xs), idxs[1]+1);
+   result = [| idx0, idxs[0], idxs[1], idx3 |];
+   return result;
+};
+
+procedure findnearfaithfulvalues(xs, x) {
+    idxs = findnearfaithfulidxs(xs, x);
+    vals = [| xs[idxs[0]], xs[idxs[1]], xs[idxs[2]], xs[idxs[3]] |];
+    return vals;
+}

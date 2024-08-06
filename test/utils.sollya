@@ -89,7 +89,7 @@ m76 = rnprecxs(6, m76wide);
 
 =#
 
-procedure findfaithful(xs, x) {
+procedure findfaithfulidxs(xs, x) {
     n = length(xs);
     k = n;
     for i from 0 to n-1 do {
@@ -107,4 +107,10 @@ procedure findfaithful(xs, x) {
         };
     };
     return result;
+};
+
+procedure findfaithfulvalues(xs, x) {
+  idxs = findfaithfulidxs(xs, x);
+  result = [| xs[idxs[1]], xs[idxs[2]] |];
+  return result;
 };

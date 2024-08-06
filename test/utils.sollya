@@ -1,3 +1,5 @@
+w;
+
 procedure intexp(x) { return [| mantissa(x), exponent(x) |]; };
 
 procedure rnprec(p, x) { return round(x, p, RN); };
@@ -37,3 +39,29 @@ procedure rd8(x) { return rdprec(8,x); };
 procedure rd9(x) { return rdprec(9,x); };
 procedure rd10(x) { return rdprec(10,x); };
 
+# degree(poly) the degree of poly
+# coeff(poly, n) the coeff of degree n in poly
+#  while (expm1(i) > 0) do { expm1(i); i := i - 1; };
+# > for i from 1 to 5 do print ("Hello world",i)
+
+procedure listify(x) { [| x |]; };
+
+procedure listofcoeffs(poly) {
+  mindeg = 0;
+  maxdeg = degree(poly);
+  lst = [| |];
+  for i from mindeg to maxdeg do {
+    cf = [| coeff(poly, i) |];
+    lst = lst @ cf;
+  };
+  return lst; 
+};
+
+procedure rnprecxs(p, lstofcoeffs) {
+  lst = [| |];
+  for c in lstofcoeffs do {
+    cf = [| rnprec(p, c) |];
+    lst = lst @ cf;
+  };
+  return lst;
+};

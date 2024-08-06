@@ -3,8 +3,8 @@ struct BaseMicroFloat{Bitwidth, Precision} <: AkoBaseMicroFloat{Bitwidth, Precis
     values::Vector{T} where {T<:Union{Float32, Float64}}
 
     function BaseMicroFloat(Bitwidth, Precision)
-        encoding = BMF_encoding(Bitwidth, Precision)
-        values = BMF_values(Bitwidth, Precision)
+        encoding = encoding(Bitwidth, Precision)
+        values = values(Bitwidth, Precision)
         new{Bitwidth, Precision}(encoding, values)
     end
 end

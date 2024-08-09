@@ -12,8 +12,8 @@ struct BaseMicroFloat{Bitwidth, Precision} <: AkoBaseMicroFloat{Bitwidth, Precis
     end
 end
 
-codes2vals(x::BaseUnsignedFloat) = x.codes2vals
-vals2codes(x::BaseUnsignedFloat) = x.vals2codes
+codes2vals(x::BaseMicroFloat) = x.codes2vals
+vals2codes(x::BaseMicroFloat) = x.vals2codes
 
 encoding(x::BaseMicroFloat) = x.encoding
 Base.values(x::BaseMicroFloat) = x.values

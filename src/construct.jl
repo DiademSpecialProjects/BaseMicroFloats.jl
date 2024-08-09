@@ -22,7 +22,7 @@ function little_dicts(bitwidth::I, sigbits::I) where {I<:Integer}
 end
 
 function little_dicts(codes::Vector{<:Unsigned}, vals::Vector{<:AbstractFloat})
-    little_dicts(Tuple(codes), Tuple(values))
+    little_dicts(Tuple(codes), Tuple(vals))
     codes2vals = LittleDict(codes, vals)
     vals2codes = LittleDict(vals, codes)
     (; codes2vals, vals2codes)

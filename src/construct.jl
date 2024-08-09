@@ -33,3 +33,11 @@ function biasedexponent_series(n_exponents, n_exponent_cycles)
     biased_exponents[1] = biased_exponents[2]
     collect(Iterators.flatten(map(x->fill(x, n_exponent_cycles), biased_exponents)))
 end
+
+function little_dicts(bitwidth, sigbits)
+    codes = Tuple(encoding(bitwidth, sigbits))
+    vals = Tuple(Base.values(bitwidth, sigbits))
+    codes2vals = LittleDict(codes, vals)
+    vals2codes = LittleDict(vals, codes)
+    (; codes2vals, vals2codes)
+end

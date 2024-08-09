@@ -6,7 +6,7 @@ struct BaseMicroFloat{Bitwidth, Precision} <: AkoBaseMicroFloat{Bitwidth, Precis
 
     function BaseMicroFloat(Bitwidth, Precision)
         codes = encoding(Bitwidth, Precision)
-        vals = infinite_values(Bitwidth, Precision)
+        vals = Base.values(Bitwidth, Precision)
         codes2vals, vals2codes = little_dicts(codes, vals)
         new{Bitwidth, Precision}(codes2vals, vals2codes, codes, vals)
     end

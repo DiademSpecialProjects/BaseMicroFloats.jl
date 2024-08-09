@@ -13,6 +13,14 @@ function Base.values(bitwidth, sigbits) # provide simple value sequence
     map(T, significand_series(n_fractions, n_fraction_cycles) .* exponent_series(n_exponents, n_exponent_cycles))
 end
 
+function little_dicts(bitwidth, sigbits)
+    codes = Tuple(encoding(bitwidth, sigbits))
+    vals = Tuple(Base.values(bitwidth, sigbits))
+    codes2vals = LittleDict(codes, vals)
+    vals2codes = LittleDict(vals, codes)
+    (; codes2vals, vals2codes)
+end
+
 function significand_series(n_fractions, n_fraction_cycles)
     fraction_sequence = (0:n_fractions-1) .// n_fractions
     normal_sequence = 1 .+ fraction_sequence
@@ -32,12 +40,4 @@ function biasedexponent_series(n_exponents, n_exponent_cycles)
     # exponent for subnormals equals the minimum exponent for normals
     biased_exponents[1] = biased_exponents[2]
     collect(Iterators.flatten(map(x->fill(x, n_exponent_cycles), biased_exponents)))
-end
-
-function little_dicts(bitwidth, sigbits)
-    codes = Tuple(encoding(bitwidth, sigbits))
-    vals = Tuple(Base.values(bitwidth, sigbits))
-    codes2vals = LittleDict(codes, vals)
-    vals2codes = LittleDict(vals, codes)
-    (; codes2vals, vals2codes)
 end

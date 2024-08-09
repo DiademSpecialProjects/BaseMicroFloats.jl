@@ -1,13 +1,19 @@
 struct BaseMicroFloat{Bitwidth, Precision} <: AkoBaseMicroFloat{Bitwidth, Precision}
+    codes2vals::LittleDict{U,F} where {U<:Union{UInt8, UInt16}, F<:Union{Float32, Float64}}
+    vals2codes::LittleDict{F,U} where {U<:Union{UInt8, UInt16}, F<:Union{Float32, Float64}}
     encoding::Vector{T} where {T<:Union{UInt8, UInt16}}
     values::Vector{T} where {T<:Union{Float32, Float64}}
 
-    function BaseMicroFloat(Bitwidth, Precision)
+    function BaseUnsignedFloat(Bitwidth, Precision)
         codes = encoding(Bitwidth, Precision)
-        vals = values(Bitwidth, Precision)
-        new{Bitwidth, Precision}(codes, vals)
+        vals = infinite_values(Bitwidth, Precision)
+        codes2vals, vals2codes = little_dicts(codes, vals)
+        new{Bitwidth, Precision}(codes2vals, vals2codes, codes, vals)
     end
 end
+
+codes2vals(x::BaseUnsignedFloat) = x.codes2vals
+vals2codes(x::BaseUnsignedFloat) = x.vals2codes
 
 encoding(x::BaseMicroFloat) = x.encoding
 Base.values(x::BaseMicroFloat) = x.values

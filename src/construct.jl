@@ -13,9 +13,22 @@ function Base.values(bitwidth, sigbits) # provide simple value sequence
     map(T, significand_series(n_fractions, n_fraction_cycles) .* exponent_series(n_exponents, n_exponent_cycles))
 end
 
-function little_dicts(bitwidth, sigbits)
+function little_dicts(bitwidth::I, sigbits::I) where {I<:Integer}
     codes = Tuple(encoding(bitwidth, sigbits))
     vals = Tuple(Base.values(bitwidth, sigbits))
+    codes2vals = LittleDict(codes, vals)
+    vals2codes = LittleDict(vals, codes)
+    (; codes2vals, vals2codes)
+end
+
+function little_dicts(codes::Vector{<:Unsigned}, vals::Vector{<:AbstractFloat})
+    little_dicts(Tuple(codes), Tuple(values))
+    codes2vals = LittleDict(codes, vals)
+    vals2codes = LittleDict(vals, codes)
+    (; codes2vals, vals2codes)
+end
+
+function little_dicts(codes::NTuple{N,U}, vals::NTuple{N,F}) where {N, U<:Unsigned, F<:AbstractFloat}
     codes2vals = LittleDict(codes, vals)
     vals2codes = LittleDict(vals, codes)
     (; codes2vals, vals2codes)

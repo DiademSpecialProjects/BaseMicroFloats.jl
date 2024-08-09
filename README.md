@@ -6,36 +6,28 @@
 
 ----
 
-BaseMicroFloats.jl provides the concrete type `BaseMicroFloat`, with the parameters `Bitwidth` and `Precision`.
-- const MF32 = BaseMicroFloat(3, 2) # Bitwidth = 3, Precision = 2
-- const MF108 = BaseMicroFloat(10, 8) # Bitwidth = 10, Precision = 8
+BaseMicroFloats.jl provides the concrete collective type `BaseMicroFloat`, using parameters `Bitwidth` and `Precision`.
 
-#### The parameters are available
-- MF32bitwidth = bitwidth(SMF32)
-- MF32precision = precision(SMF32)
+
+```
+using BaseMicroFloats, Test
+
+allbits = 3
+sigbits = 2
+const MF32 = BaseMicroFloat(allbits, sigbits)
+
+@test bitwidth(MF32) == allbits
+@test precision(MF32) == sigbits
+```
 
 A `BaseMicroFloat` contains two fields, `encoding` and `values`.
 - `encoding` holds the sequence of value encodings for the specified Bitwidth and Precision
 - `values` holds the sequence floating-point values  for the specified Bitwidth and Precision
 
-#### The fields are available
-- MF32encoding = encoding(MF32)
-- MF32values = values(MF32)
-
-### Technical Notes
-
-#### BaseMicroFloats are used to construct other MicroFloat types
-- they are not intended for direct use
-  - see UnsignedMicroFloats.jl
-  - see SignedMicroFloats.jl
-
-#### The values of a BaseMicroFloat are finite non-negative numbers:
-- there is one 0
-- there are no negative values
-- there are no NaNs
-- there are no Infs
 
 #### Types used
+BaseMicroFloats with bitwidths <= 8 are encoded using _Unsigned Integers_ and valued using _Floats_
+
 ```
 if the Bitwidth is <= 8
     the encoding is a vector of UInt8
@@ -45,22 +37,18 @@ else
     the values are a vector of Float64
 end
 ```
-
-### example
 ```
-using BaseMicroFloat
-
-MF32 = BaseMicroFloat(3, 2);
-
-bitwidth(MF32)
-# 3
-
-precision(MF32)
-# 2
-
-encoding(MF32)
-# [0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07]
-
-values(MF32)
-# [0.0, 0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0]
+@test encoding(MF32) == UInt8[0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07]
+@test values(MF32) == Float32[0.0, 0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0]
 ```
+### Technical Notes
+
+#### BaseMicroFloats are used to construct other MicroFloat types
+- see UnsignedMicroFloats.jl
+- see SignedMicroFloats.jl
+
+#### The values of a BaseMicroFloat are finite non-negative numbers:
+- there is one 0
+- there are no negative values
+- there are no NaNs
+- there are no Infs

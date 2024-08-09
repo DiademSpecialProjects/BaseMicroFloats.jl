@@ -7,6 +7,8 @@ export AbstractMicroFloat, AkoBaseMicroFloat,
 
 import Base: precision, values
 
+using OrderedCollections: LittleDict
+
 abstract type AbstractMicroFloat{Bitwidth, Precision}  <: AbstractFloat end
 abstract type AkoBaseMicroFloat{Bitwidth, Precision} <: AbstractMicroFloat{Bitwidth, Precision} end
 
